@@ -50,14 +50,9 @@ read -p "請輸入裝置編號(格式：域:總線:裝置.函數，例如 01:00.
 echo "Output the content:"
 echo "$lspci_output"
 
-# 提取 Vendor ID 和 Device ID
-vendor_id1=$(echo "$lspci_output" | awk '{print $3}' | cut -d: -f1)
-device_id1=$(echo "$lspci_output" | awk '{print $3}' | cut -d: -f2)
-
-vendor_id2=$(echo "$lspci_output" | awk '{print $4}' | cut -d: -f1)
-device_id2=$(echo "$lspci_output" | awk '{print $4}' | cut -d: -f2)
-
-# 輸出格式化信息
+device_info=$(echo "$lspci_output" | awk '{print $3}')
 echo ""
-echo "Device 1: $vendor_id1:$device_id1"
-echo "Device 2: $vendor_id2:$device_id2"
+echo "Device 1: $device_info"
+
+device_info=$(echo "$lspci_output" | awk '{print $4}')
+echo "Device 2: $device_info"
