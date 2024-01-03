@@ -47,10 +47,20 @@ lspci -v | grep -E "VGA compatible controller|Audio device"
 
 # 詢問使用者輸入裝置編號
 read -p "請輸入裝置編號(格式：域:總線:裝置.函數，例如 01:00.0): " device_id
+lspci_output=$(lspci -n -s "$device_id")
 
-pci_info=$(lspci -n -s "$device_id" | awk '{print $3}')
-vendor_id=$(echo "$pci_info" | cut -d: -f1)
-device_id=$(echo "$pci_info" | cut -d: -f2)
+echo "Output the content:"
+echo "$lspci_output"
 
-echo "Vendor ID: $vendor_id"
-echo "Device ID: $device_id"
+# 提取 Vendor ID 和 Device ID
+vendor_id=$(echo "$lspci_output" | awk '{print $3}' | cut -d: -f1)
+device_id=$(echo "$lspci_output" | awk '{print $3}' | cut -d: -f2)
+
+# 輸出格式化信息
+echo ""
+echo "Device 1: $vendor_id:$device_id"
+
+vendor_id=$(echo "$lspci_output" | awk '{print $4}' | cut -d: -f1)
+device_id=$(echo "$lspci_output" | awk '{print $4}' | cut -d: -f2)
+
+echo "Device 2: $vendor_id:$device_id"
