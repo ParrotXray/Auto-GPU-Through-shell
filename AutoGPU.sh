@@ -46,10 +46,13 @@ echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
 lspci -v | grep -E "VGA compatible controller|Audio device"
 
 # 詢問使用者輸入裝置編號
-read -p "請輸入裝置編號(格式：域:總線:裝置.函數，例如 01:00.0): " device_id
+read -p "請輸入裝置編號格式：域:總線:裝置.函數，例如 01:00: " device_id
+lspci_output=$(lspci -n -s "$device_id")
+
 echo "Output the content:"
 echo "$lspci_output"
 
+# 提取 Vendor ID 和 Device ID
 device_info=$(echo "$lspci_output" | awk '{print $3}')
 echo ""
 echo "Device 1: $device_info"
