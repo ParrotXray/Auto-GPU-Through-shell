@@ -4,14 +4,12 @@
 sudo apt update
 sudo apt install -y vim
 
-# 讀取用戶的CPU選擇
 echo "Choice the CPU:"
 echo "1. Intel"
 echo "2. AMD"
 echo "3. Xeon"
 read -p "Please enter number: " cpu_choice
 
-# 根據用戶的選擇修改GRUB設定
 case $cpu_choice in
     1)
         # Intel CPU
@@ -30,8 +28,6 @@ case $cpu_choice in
         exit 1
         ;;
 esac
-
-# 更新GRUB
 update-grub
 
 echo "GRUB setting is update"
@@ -45,17 +41,15 @@ echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
 
 lspci -v | grep -E "VGA compatible controller|Audio device"
 
-# 詢問使用者輸入裝置編號
-read -p "請輸入裝置編號格式：域:總線:裝置.函數，例如 01:00: " device_id
-lspci_output=$(lspci -n -s "$device_id")
+read -p "Enter the Device number (ex: 01:00): " device
+lspci_output=$(lspci -n -s "$device")
 
 echo "Output the content:"
 echo "$lspci_output"
 
-# 提取 Vendor ID 和 Device ID
-device_info=$(echo "$lspci_output" | awk '{print $3}')
-echo ""
-echo "Device 1: $device_info"
+read -p "Enter the Device ID(ex: 10de:1382,10de:0fbc,XXX:OOO....)" device_id
 
-device_info=$(echo "$lspci_output" | awk '{print $4}')
-echo "Device 2: $device_info"
+echo "options vfio-pci ids="$device_id" disable_vga=1"> /etc/modprobe.d/vfio.conf
+
+update-initramfs -u
+reboot
