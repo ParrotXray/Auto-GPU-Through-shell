@@ -1,4 +1,4 @@
-# Pass the graphics card through to the PVE VM virtual machine
+# ProxmoxVE VM Device Passthrough Guide
 
 ## setup.1
 Searching for the installation method of PVE online, there are many resources available that can be utilized. I won't go into detail here. However, here are some important notes for the installation:
