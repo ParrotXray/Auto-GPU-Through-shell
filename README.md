@@ -243,7 +243,7 @@ You can plug VGA or other monitor cables directly into the graphics card, and th
 ## setup.7 
 ### You can use automated scripts to accomplish passthrough
 ```sh=
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ParrotXray/Auto-GPU-Through-shell/main/AutoGPU.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ParrotXray/ProxmoxVE-VM-Device-Passthrough-Guide/refs/heads/main/AutoGPU.sh)"
 ```
 
 
