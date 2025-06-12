@@ -3,9 +3,9 @@
 ## setup.1
 Searching for the installation method of PVE online, there are many resources available that can be utilized. I won't go into detail here. However, here are some important notes for the installation:
 
-- 1. The installation mode must use UEFI, and you need to enable it in the BIOS.
+- The installation mode must use UEFI, and you need to enable it in the BIOS.
 
-- 2. You cannot have both the iGPU and dGPU enabled simultaneously. You must disable the CPU's iGPU, as having both active can lead to issues.
+- You cannot have both the iGPU and dGPU enabled simultaneously. You must disable the CPU's iGPU, as having both active can lead to issues.
 
 ## setup.2
 Open the PVE dashboard, and log in using the IP address, which may be in the format `192.168.xxx.ooo:8006`, specific to your installation. The default login is with the root username and the password you set during the installation. After logging in, you can access the `shell` at the following location
